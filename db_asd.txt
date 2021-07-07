@@ -1,0 +1,39 @@
+-- Q.1 --
+SELECT departments.location_id, locations.street_address, locations.city, locations.state_province, countries.country_name
+FROM departments 
+LEFT JOIN locations ON departments.location_id = locations.location_id 
+LEFT JOIN countries ON locations.country_id = countries.country_id;
+-- ---------------------------------------------------------------------------------------------
+-- Q.2 --
+SELECT employees.first_name, employees.last_name, employees.department_id, departments.department_name
+FROM employees
+LEFT JOIN departments ON employees.department_id = departments.department_id;
+
+-- ----------------------------------------------------------------------------------------------
+
+-- Q.3 --
+SELECT employees.first_name, employees.last_name, jobs.job_title, employees.department_id, departments.department_name
+FROM employees 
+JOIN jobs ON employees.job_id = jobs.job_id 
+JOIN departments ON employees.department_id = departments.department_id
+JOIN locations ON locations.city = 'London';
+
+-- -----------------------------------------------------------------------------------------
+
+-- Q.4 --
+SELECT employee.employee_id, employee.first_name, employee.last_name, manager.employee_id as manager, manager.first_name, manager.last_name
+FROM employees employee 
+JOIN employees manager ON  employee.manager_id = manager.employee_id;
+
+-- ----------------------------------------------------------------------------------------
+
+-- Q.5 --
+
+SELECT employees.first_name, employees.last_name, employees.hire_date
+FROM employees
+WHERE employees.hire_date > (
+SELECT employees.hire_date
+FROM employees
+WHERE first_name = 'Jones' OR last_name = 'Jones');
+
+-- --------------------------------------------------------------------------------------
